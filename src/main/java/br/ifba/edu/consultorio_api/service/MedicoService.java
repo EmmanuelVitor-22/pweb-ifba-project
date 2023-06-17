@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,13 +64,13 @@ public class MedicoService {
         var uri = builder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
         return ResponseEntity.created(uri).body(medicoDTO);
     }
-    public  ResponseEntity<MedicoDTO> atualizarMedicos(Long id, MedicoDTO medicoDTO){
+    public  ResponseEntity<MedicoDTO> atualizarMedicos(UUID id, MedicoDTO medicoDTO){
         var data = new Medico( medicoDTO);
         data.setId(id);
         var medico = medicoRepository.save(data);
         return ResponseEntity.ok().body(medicoDTO);
     }
-    public  ResponseEntity<MedicoDTO> atualizarNomeMedicos(Long id, MedicoDTO medicoDTO){
+    public  ResponseEntity<MedicoDTO> atualizarNomeMedicos(UUID id, MedicoDTO medicoDTO){
         return medicoRepository.findById(id).map(
                 record -> {
                     record.setNome(medicoDTO.nome());
