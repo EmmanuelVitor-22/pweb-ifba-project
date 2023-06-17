@@ -1,5 +1,6 @@
 package br.ifba.edu.consultorio_api.dto;
 
+import br.ifba.edu.consultorio_api.entities.Consulta;
 import br.ifba.edu.consultorio_api.entities.Medico;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 
@@ -14,4 +15,12 @@ public record ConsultaDTO(
         LocalDateTime dia_hora
 
 ) {
+        public  ConsultaDTO(Consulta consulta){
+            this(
+                    consulta.getId(),
+                    consulta.getMedico(),
+                    consulta.getPaciente(),
+                    consulta.getDia_hora()
+            );
+        }
 }

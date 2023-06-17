@@ -14,16 +14,15 @@ public record MedicoDTO(
 
         String telefone,
 
-        Especialidade especialidade
-) {
+        Especialidade especialidade) {
 
-    public MedicoDTO(Medico medico) {
+        public MedicoDTO(Medico medico) {
 
-        this(medico.getId(),
-             medico.getNome(),
-             medico.getCRM(),
-             medico.getNome(),
-             medico.getTelefone(),
-             medico.getEspecialidade());
-    }
+            this(medico.getId(),
+                    medico.getNome(),
+                    medico.getCRM(),
+                    medico.getNome(),
+                    medico.getTelefone(),
+                    medico.getEspecialidade());
+        }
 }
