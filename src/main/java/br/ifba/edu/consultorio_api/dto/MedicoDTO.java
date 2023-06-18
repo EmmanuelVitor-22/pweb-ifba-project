@@ -4,24 +4,22 @@ import br.ifba.edu.consultorio_api.entities.Especialidade;
 import br.ifba.edu.consultorio_api.entities.Medico;
 import jakarta.persistence.Enumerated;
 
-import java.util.UUID;
-
 public record MedicoDTO(
-        UUID id,
-        String nome,
-        String CRM,
-        String email,
+                Long id,
+                String nome,
+                String CRM,
+                String email,
 
-        String telefone,
+                String telefone,
 
-        Especialidade especialidade) {
+                Especialidade especialidade) {
 
         public MedicoDTO(Medico medico) {
-            this(medico.getId(),
-                 medico.getNome(),
-                 medico.getCRM(),
-                 medico.getEmail(),
-                 medico.getTelefone(),
-                 medico.getEspecialidade());
+                this(medico.getId(),
+                                medico.getNome(),
+                                medico.getCRM(),
+                                medico.getEmail(),
+                                medico.getTelefone(),
+                                medico.getEspecialidade());
         }
 }

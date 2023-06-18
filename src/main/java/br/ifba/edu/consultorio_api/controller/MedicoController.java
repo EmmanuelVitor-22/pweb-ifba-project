@@ -18,24 +18,26 @@ public class MedicoController {
     @Autowired
     private MedicoService medicoService;
 
-
     @GetMapping
-    public ResponseEntity<List<MedicoDTO>> listarMedicos(){
+    public ResponseEntity<List<MedicoDTO>> listarMedicos() {
         return medicoService.listarTodosMedicos();
     }
+
     @PostMapping
-    public  ResponseEntity<MedicoDTO> criarMedico(@RequestBody MedicoDTO medicoDTO, UriComponentsBuilder builder){
+    public ResponseEntity<MedicoDTO> criarMedico(@RequestBody MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         return medicoService.criarMedicos(medicoDTO, builder);
 
     }
-    @PutMapping("{id}")
+
+    @PutMapping("medicos/geral/{id}")
     @Transactional
-    public ResponseEntity<MedicoDTO> atualizarGeral(@PathVariable Long id, @RequestBody MedicoDTO medicoDTO){
-        return medicoService.atualizarMedicos(id,medicoDTO);
+    public ResponseEntity<MedicoDTO> atualizarGeral(@PathVariable Long id, @RequestBody MedicoDTO medicoDTO) {
+        return medicoService.atualizarMedicos(id, medicoDTO);
     }
+
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<MedicoDTO> atualizarNome(@PathVariable Long id, @RequestBody MedicoDTO medicoDTO){
-        return medicoService.atualizarNomeMedicos(id,medicoDTO);
+    public ResponseEntity<MedicoDTO> atualizarNome(@PathVariable Long id, @RequestBody MedicoDTO medicoDTO) {
+        return medicoService.atualizarNomeMedicos(id, medicoDTO);
     }
 }

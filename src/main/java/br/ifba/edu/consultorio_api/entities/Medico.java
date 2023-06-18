@@ -6,8 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
+@Table(name = "medico")
 
 @Entity(name = "medico")
 @Getter
@@ -17,18 +16,23 @@ import java.util.UUID;
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    @Column
+    private Long id;
+    @Column
     private String nome;
+    @Column
     private String CRM;
+    @Column
     private String email;
-
+    @Column
     private String telefone;
 
     @Enumerated
-    private  Especialidade especialidade= Especialidade.Dermatologia;
+    @Column
+    private Especialidade especialidade = Especialidade.Dermatologia;
 
     public Medico(MedicoDTO medicoDTO) {
-        this.nome =medicoDTO.nome();
+        this.nome = medicoDTO.nome();
         this.CRM = medicoDTO.CRM();
         this.email = medicoDTO.email();
         this.telefone = medicoDTO.telefone();

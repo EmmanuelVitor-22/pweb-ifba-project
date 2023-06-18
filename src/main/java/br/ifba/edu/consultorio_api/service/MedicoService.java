@@ -10,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -19,7 +19,7 @@ public class MedicoService {
     @Autowired
     MedicoRepository medicoRepository;
 
-    private ResponseEntity <MedicoDTO> listarMedicosPorNome(String nome) {
+    private ResponseEntity<MedicoDTO> listarMedicosPorNome(String nome) {
         Optional<Medico> medicoOptional = medicoRepository.findByNome(nome);
         if (medicoOptional.isPresent()) {
             Medico medico = medicoOptional.get();
@@ -29,33 +29,33 @@ public class MedicoService {
         return null;
     }
 
-    public ResponseEntity <List<MedicoDTO>> listarTodosMedicos(){
+    public ResponseEntity<List<MedicoDTO>> listarTodosMedicos() {
         return ResponseEntity.ok(medicoRepository.findAll()
                 .stream()
                 .map(MedicoDTO::new)
-                .collect(Collectors.toList())
-        );
+                .collect(Collectors.toList()));
     }
 
-    public  ResponseEntity<MedicoDTO> criarMedicos(MedicoDTO medicoDTO, UriComponentsBuilder builder){
+    public ResponseEntity<MedicoDTO> criarMedicos(MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         var medico = medicoRepository.save(new Medico(medicoDTO));
         var uri = builder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
         return ResponseEntity.created(uri).body(medicoDTO);
     }
-    public  ResponseEntity<MedicoDTO> atualizarMedicos(UUID id, MedicoDTO medicoDTO){
-        var data = new Medico( medicoDTO);
+
+    public ResponseEntity<MedicoDTO> atualizarMedicos(Long id, MedicoDTO medicoDTO) {
+        var data = new Medico(medicoDTO);
         data.setId(id);
         var medico = medicoRepository.save(data);
         return ResponseEntity.ok().body(medicoDTO);
     }
-    public  ResponseEntity<MedicoDTO> atualizarNomeMedicos(UUID id, MedicoDTO medicoDTO){
+
+    public ResponseEntity<MedicoDTO> atualizarNomeMedicos(Long id, MedicoDTO medicoDTO) {
         return medicoRepository.findById(id).map(
                 record -> {
                     record.setNome(medicoDTO.nome());
                     medicoRepository.save(record);
                     return ResponseEntity.ok().body(medicoDTO);
-                }
-        ).orElse(ResponseEntity.notFound().build());
+                }).orElse(ResponseEntity.notFound().build());
     }
 
 }
