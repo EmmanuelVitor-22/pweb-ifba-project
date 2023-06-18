@@ -17,12 +17,11 @@ public record MedicoDTO(
         Especialidade especialidade) {
 
         public MedicoDTO(Medico medico) {
-
             this(medico.getId(),
-                    medico.getNome(),
-                    medico.getCRM(),
-                    medico.getNome(),
-                    medico.getTelefone(),
-                    medico.getEspecialidade());
+                 medico.getNome(),
+                 medico.getCRM(),
+                 medico.getEmail(),
+                 medico.getTelefone(),
+                 medico.getEspecialidade());
         }
 }

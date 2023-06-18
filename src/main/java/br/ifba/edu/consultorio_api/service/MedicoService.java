@@ -19,28 +19,6 @@ public class MedicoService {
     @Autowired
     MedicoRepository medicoRepository;
 
-//    private List<MedicoDTO> converterParaMedicoDTO(List<Medico> lista){
-//        return lista.stream().map(medico -> new MedicoDTO( medico.getId(),
-//                medico.getNome(),
-//                medico.getCRM(),
-//                medico.getEmail(),
-//                medico.getTelefone(),
-//                medico.getEspecialidade())
-//        ).collect(Collectors.toList());
-//
-//    }
-//
-//    private List<Medico> converterParaMedico(List<MedicoDTO> lista){
-//        return lista.stream().map(medico -> new Medico( medico.id(),
-//                medico.nome(),
-//                medico.CRM(),
-//                medico.email(),
-//                medico.telefone(),
-//                medico.especialidade())
-//        ).collect(Collectors.toList());
-//
-//    }
-
     private ResponseEntity <MedicoDTO> listarMedicosPorNome(String nome) {
         Optional<Medico> medicoOptional = medicoRepository.findByNome(nome);
         if (medicoOptional.isPresent()) {
