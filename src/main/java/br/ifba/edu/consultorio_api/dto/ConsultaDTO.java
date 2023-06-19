@@ -5,13 +5,14 @@ import br.ifba.edu.consultorio_api.entities.Medico;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public record ConsultaDTO(
-                Long id,
-                Medico medico,
-                Paciente paciente,
+        Long id,
+        Medico medico,
+        Paciente paciente,
 
-                LocalDateTime dia_hora
+        LocalDateTime dia_hora
 
 ) {
         public ConsultaDTO(Consulta consulta) {

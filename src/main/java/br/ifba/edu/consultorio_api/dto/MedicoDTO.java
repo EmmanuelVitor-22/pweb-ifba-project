@@ -4,6 +4,8 @@ import br.ifba.edu.consultorio_api.entities.Especialidade;
 import br.ifba.edu.consultorio_api.entities.Medico;
 import jakarta.persistence.Enumerated;
 
+import java.util.UUID;
+
 public record MedicoDTO(
                 Long id,
                 String nome,
