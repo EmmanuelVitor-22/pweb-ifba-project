@@ -10,7 +10,6 @@ import java.util.UUID;
 public record PacienteDTO(
                 Long id,
                 String nome,
-                String CPF,
                 String email,
                 String telefone
 
@@ -18,7 +17,6 @@ public record PacienteDTO(
         public PacienteDTO(Paciente paciente) {
                 this(paciente.getId(),
                                 paciente.getNome(),
-                                paciente.getCPF(),
                                 paciente.getEmail(),
                                 paciente.getTelefone());
         }
