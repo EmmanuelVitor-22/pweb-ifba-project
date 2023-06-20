@@ -1,7 +1,9 @@
 package br.ifba.edu.consultorio_api.service;
 
 import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
+import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
+import br.ifba.edu.consultorio_api.entities.Medico;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 import br.ifba.edu.consultorio_api.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +51,14 @@ public class PacienteService {
         return ResponseEntity.created(uri).body(pacienteDTO);
     }
 
+    public ResponseEntity<PacienteDTO> atualizarPaciente(Long id, PacienteDTO pacienteDTO) {
+        var data = new Paciente(pacienteDTO);
+        data.setId(id);
+        var paciente = pacienteRepository.save(data);
+        return ResponseEntity.ok().body(pacienteDTO);
+    }
 
 }
+
+
+
