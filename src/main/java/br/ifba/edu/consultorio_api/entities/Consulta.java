@@ -1,6 +1,6 @@
 package br.ifba.edu.consultorio_api.entities;
 
-import br.ifba.edu.consultorio_api.dto.ConsultaDTO;
+import br.ifba.edu.consultorio_api.dto.request.ConsultaDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Table(name = "consulta")
 @Entity(name = "consulta")

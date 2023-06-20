@@ -1,7 +1,6 @@
 package br.ifba.edu.consultorio_api.controller;
 
-import br.ifba.edu.consultorio_api.dto.MedicoDTO;
-import br.ifba.edu.consultorio_api.dto.PacienteDTO;
+import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
 import br.ifba.edu.consultorio_api.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ public class PacienteController {
     PacienteService pacienteService;
 
     @GetMapping
-    public ResponseEntity<List<PacienteDTO>> listaDePacientes() {
+    public ResponseEntity<List<PacienteResponseDTO>> listaDePacientes() {
         return pacienteService.listarTodosPacientes();
     }
 

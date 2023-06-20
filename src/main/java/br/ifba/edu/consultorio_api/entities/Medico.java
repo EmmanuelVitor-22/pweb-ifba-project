@@ -1,13 +1,11 @@
 package br.ifba.edu.consultorio_api.entities;
 
-import br.ifba.edu.consultorio_api.dto.MedicoDTO;
+import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
 
 @Table(name = "medico")
 

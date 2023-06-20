@@ -1,7 +1,6 @@
 package br.ifba.edu.consultorio_api.controller;
 
-import br.ifba.edu.consultorio_api.dto.MedicoDTO;
-import br.ifba.edu.consultorio_api.repository.MedicoRepository;
+import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.service.MedicoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/medicos")

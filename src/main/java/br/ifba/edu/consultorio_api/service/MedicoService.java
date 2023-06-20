@@ -1,6 +1,6 @@
 package br.ifba.edu.consultorio_api.service;
 
-import br.ifba.edu.consultorio_api.dto.MedicoDTO;
+import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.entities.Medico;
 import br.ifba.edu.consultorio_api.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 import java.util.Optional;
 
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service

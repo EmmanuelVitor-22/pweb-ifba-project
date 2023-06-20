@@ -1,4 +1,4 @@
-package br.ifba.edu.consultorio_api.dto;
+package br.ifba.edu.consultorio_api.dto.request;
 
 import br.ifba.edu.consultorio_api.entities.Especialidade;
 import br.ifba.edu.consultorio_api.entities.Medico;
