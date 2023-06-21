@@ -33,7 +33,11 @@ public class PacienteController {
     @PostMapping
     public ResponseEntity<PacienteDTO> inserirPaciente(@RequestBody PacienteDTO pacienteDTO, UriComponentsBuilder builder) {
         return pacienteService.inserirPaciente(pacienteDTO, builder);
-
     }
 
+    @PutMapping("/{id}")
+
+        public ResponseEntity<PacienteDTO> atualizarPaciente(@PathVariable  Long id, @RequestBody PacienteDTO pacienteDTO) {
+        return pacienteService.atualizarPaciente(id, pacienteDTO);
+    }
 }

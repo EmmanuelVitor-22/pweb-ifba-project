@@ -1,5 +1,6 @@
 package br.ifba.edu.consultorio_api.entities;
 
+import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
 import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,8 +32,8 @@ public class Paciente {
     public Paciente(PacienteDTO pacienteDTO) {
         this.id = pacienteDTO.id();
         this.nome = pacienteDTO.nome();
-        this.CPF = pacienteDTO.CPF();
         this.email = pacienteDTO.email();
         this.telefone = pacienteDTO.telefone();
     }
+
 }
