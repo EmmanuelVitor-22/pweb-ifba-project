@@ -3,10 +3,14 @@ package br.ifba.edu.consultorio_api.entities;
 import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
 import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Table(name = "paciente")
 @Entity(name = "paciente")
@@ -18,20 +22,22 @@ public class Paciente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-    @Column
+    @Column(nullable = false)
     private String nome;
-    @Column
+    @Column(nullable = false)
+    @CPF
     private String CPF;
-    @Column
+    @Column(nullable = false)
+    @Email
     private String email;
-    @Column
+    @Column(nullable = false)
     private String telefone;
 
+
     public Paciente(PacienteDTO pacienteDTO) {
-        this.id = pacienteDTO.id();
         this.nome = pacienteDTO.nome();
+        this.CPF = pacienteDTO.CPF();
         this.email = pacienteDTO.email();
         this.telefone = pacienteDTO.telefone();
     }

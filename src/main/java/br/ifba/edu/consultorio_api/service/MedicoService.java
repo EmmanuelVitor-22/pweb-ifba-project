@@ -1,6 +1,7 @@
 package br.ifba.edu.consultorio_api.service;
 
 import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
+import br.ifba.edu.consultorio_api.dto.response.MedicoResponseDTO;
 import br.ifba.edu.consultorio_api.entities.Medico;
 import br.ifba.edu.consultorio_api.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,20 @@ public class MedicoService {
     @Autowired
     MedicoRepository medicoRepository;
 
-    private ResponseEntity<MedicoDTO> listarMedicosPorNome(String nome) {
+    private ResponseEntity<MedicoResponseDTO> listarMedicosPorNome(String nome) {
         Optional<Medico> medicoOptional = medicoRepository.findByNome(nome);
         if (medicoOptional.isPresent()) {
             Medico medico = medicoOptional.get();
-            return ResponseEntity.ok(new MedicoDTO(medico));
+            return ResponseEntity.ok(new MedicoResponseDTO(medico));
         }
 
         return null;
     }
 
-    public ResponseEntity<List<MedicoDTO>> listarTodosMedicos() {
+    public ResponseEntity<List<MedicoResponseDTO>> listarTodosMedicos() {
         return ResponseEntity.ok(medicoRepository.findAll()
                 .stream()
-                .map(MedicoDTO::new)
+                .map(MedicoResponseDTO::new)
                 .collect(Collectors.toList()));
     }
 

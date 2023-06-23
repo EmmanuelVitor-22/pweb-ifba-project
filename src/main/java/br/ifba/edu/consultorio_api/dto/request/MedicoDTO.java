@@ -7,21 +7,23 @@ import jakarta.persistence.Enumerated;
 import java.util.UUID;
 
 public record MedicoDTO(
-                Long id,
-                String nome,
-                String CRM,
-                String email,
 
-                String telefone,
+        String nome,
+        String CRM,
+        String email,
 
-                Especialidade especialidade) {
+        String telefone,
+
+        Especialidade especialidade) {
+
 
         public MedicoDTO(Medico medico) {
-                this(medico.getId(),
+                this(
                                 medico.getNome(),
                                 medico.getCRM(),
                                 medico.getEmail(),
-                                medico.getTelefone(),
-                                medico.getEspecialidade());
+                        medico.getTelefone(),
+                                medico.getEspecialidade()
+                );
         }
 }

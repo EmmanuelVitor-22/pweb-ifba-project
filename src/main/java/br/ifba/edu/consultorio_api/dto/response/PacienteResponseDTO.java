@@ -8,18 +8,18 @@ import java.util.UUID;
 
 
 public record PacienteResponseDTO(
-
         String nome,
-        String CPF,
-        String email
 
+        String email,
+
+        String CPF
 
 ) {
     public PacienteResponseDTO(Paciente paciente) {
         this(
                 paciente.getNome(),
-                paciente.getCPF(),
-                paciente.getEmail()
+                paciente.getEmail(),
+                paciente.getCPF()
         );
 
     }

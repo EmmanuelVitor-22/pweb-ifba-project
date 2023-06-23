@@ -1,6 +1,7 @@
 package br.ifba.edu.consultorio_api.controller;
 
 import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
+import br.ifba.edu.consultorio_api.dto.response.MedicoResponseDTO;
 import br.ifba.edu.consultorio_api.service.MedicoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class MedicoController {
     private MedicoService medicoService;
 
     @GetMapping
-    public ResponseEntity<List<MedicoDTO>> listarMedicos() {
+    public ResponseEntity<List<MedicoResponseDTO>> listarMedicos() {
         return medicoService.listarTodosMedicos();
     }
 
