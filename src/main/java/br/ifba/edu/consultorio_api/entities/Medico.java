@@ -34,6 +34,11 @@ public class Medico {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Especialidade especialidade = Especialidade.Dermatologia;
+    @Column(nullable = false)
+    private boolean status;
+    @Column(nullable = false)
+    @Embedded
+    private Endereco endereco;
 
 
     public Medico(MedicoDTO medicoDTO) {

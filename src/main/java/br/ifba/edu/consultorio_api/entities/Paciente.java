@@ -33,6 +33,11 @@ public class Paciente {
     private String email;
     @Column(nullable = false)
     private String telefone;
+    @Column(nullable = false)
+    private boolean status;
+    @Column(nullable = false)
+    @Embedded
+    private Endereco endereco;
 
 
     public Paciente(PacienteDTO pacienteDTO) {
