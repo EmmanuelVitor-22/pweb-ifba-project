@@ -12,7 +12,7 @@ public record ConsultaDTO(
         Medico medico,
         Paciente paciente,
 
-        LocalDateTime dia_hora
+        LocalDateTime data_hora
 
 ) {
         public ConsultaDTO(Consulta consulta) {
@@ -20,6 +20,6 @@ public record ConsultaDTO(
                                 consulta.getId(),
                                 consulta.getMedico(),
                                 consulta.getPaciente(),
-                                consulta.getDia_hora());
+                                consulta.getData_hora());
         }
 }

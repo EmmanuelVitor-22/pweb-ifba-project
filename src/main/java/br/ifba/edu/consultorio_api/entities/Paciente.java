@@ -45,6 +45,7 @@ public class Paciente {
         this.CPF = pacienteDTO.CPF();
         this.email = pacienteDTO.email();
         this.telefone = pacienteDTO.telefone();
+        this.endereco = pacienteDTO.endereco();
     }
 
 }

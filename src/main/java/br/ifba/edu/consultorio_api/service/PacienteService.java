@@ -5,6 +5,9 @@ import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 import br.ifba.edu.consultorio_api.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,8 @@ public class PacienteService {
 
     @Autowired
     PacienteRepository pacienteRepository;
-
+    Sort sort = Sort.by("nome").ascending();
+    Pageable pageable = PageRequest.of(0,10,sort);
     public ResponseEntity <List<PacienteResponseDTO>> listarTodosPacientes(){
         return ResponseEntity.ok(pacienteRepository.findAll()
                 .stream()
@@ -35,15 +39,7 @@ public class PacienteService {
                 .collect(Collectors.toList()));
     }
 
-    public ResponseEntity<List<PacienteResponseDTO>> listarPorLetraPaciente( String letra) {
-        return ResponseEntity.ok(
-                pacienteRepository.findByNomeStartingWithIgnoreCase(letra).
-                        stream().
-                        map(PacienteResponseDTO::new)
-                        .collect(Collectors.toList())
-        );
 
-    }
 
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PacienteDTO> inserirPaciente(PacienteDTO pacienteDTO, UriComponentsBuilder builder) {

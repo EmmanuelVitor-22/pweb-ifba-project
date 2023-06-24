@@ -29,14 +29,16 @@ public class Consulta {
     @JoinColumn
     private Paciente paciente;
     @Column
-    private LocalDateTime dia_hora;
+    private LocalDateTime data_hora;
+    private boolean status = true;
+    private String cancelamento;
 
 
     public Consulta(ConsultaDTO consultaDTO) {
         this.id = consultaDTO.id();
         this.medico = consultaDTO.medico();
         this.paciente = consultaDTO.paciente();
-        this.dia_hora = consultaDTO.dia_hora();
+        this.data_hora = consultaDTO.data_hora();
     }
 
 }

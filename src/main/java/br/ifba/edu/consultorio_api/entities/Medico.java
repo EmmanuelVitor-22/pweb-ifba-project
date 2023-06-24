@@ -47,5 +47,6 @@ public class Medico {
         this.email = medicoDTO.email();
         this.telefone = medicoDTO.telefone();
         this.especialidade = medicoDTO.especialidade();
+        this.endereco = medicoDTO.endereco();
     }
 }
