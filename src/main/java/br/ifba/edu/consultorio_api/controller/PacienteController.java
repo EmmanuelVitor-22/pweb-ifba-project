@@ -29,6 +29,14 @@ public class PacienteController {
         return ResponseEntity.ok(pacientesDTO);
     }
 
+    @GetMapping("/buscar-por-nome")
+    public ResponseEntity<List<PacienteResponseDTO>> buscarPorNome(@RequestParam("nome") String nome) {
+        return pacienteService.listarPorNomePaciente(nome);
+    }
+    @GetMapping("/busca-por-letra")
+    public ResponseEntity<List<PacienteResponseDTO>> buscrPoLetra(@RequestParam("letra") String letra){
+        return  pacienteService.listarPorLetraPaciente(letra);
+    }
 
     @PostMapping
     public ResponseEntity<PacienteDTO> inserirPaciente(@RequestBody PacienteDTO pacienteDTO, UriComponentsBuilder builder) {

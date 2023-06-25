@@ -30,6 +30,22 @@ public class PacienteService {
         return pacientes.map(PacienteResponseDTO::new);
     }
 
+    public ResponseEntity<List<PacienteResponseDTO>> listarPorNomePaciente(String nome) {
+        return ResponseEntity.ok(pacienteRepository.findByNome(nome)
+                .stream()
+                .map(paciente -> new PacienteResponseDTO(paciente.nome(), paciente.CPF(), paciente.email()))
+                .collect(Collectors.toList()));
+    }
+
+    public ResponseEntity<List<PacienteResponseDTO>> listarPorLetraPaciente( String letra) {
+        return ResponseEntity.ok(
+                pacienteRepository.findByNomeStartingWithIgnoreCase(letra).
+                        stream().
+                        map(PacienteResponseDTO::new)
+                        .collect(Collectors.toList())
+        );
+
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PacienteDTO> inserirPaciente(PacienteDTO pacienteDTO, UriComponentsBuilder builder) {

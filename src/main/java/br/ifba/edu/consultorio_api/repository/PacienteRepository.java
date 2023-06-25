@@ -10,5 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
-
+    List<PacienteResponseDTO> findByNome(String nome);
+    @Query("SELECT p FROM paciente p WHERE LOWER(p.nome) LIKE CONCAT(:letra, '%')")
+    List<Paciente> findByNomeStartingWithIgnoreCase(String letra);
 }
