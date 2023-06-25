@@ -2,6 +2,7 @@ package br.ifba.edu.consultorio_api.entities;
 
 import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
 import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
+import br.ifba.edu.consultorio_api.dto.request.update.PacienteUpdateDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -46,6 +47,11 @@ public class Paciente {
         this.email = pacienteDTO.email();
         this.telefone = pacienteDTO.telefone();
         this.endereco = pacienteDTO.endereco();
+    }
+    public Paciente(PacienteUpdateDTO pacienteUpdateDTO) {
+        this.nome = pacienteUpdateDTO.nome();
+        this.telefone = pacienteUpdateDTO.telefone();
+        this.endereco = pacienteUpdateDTO.endereco();
     }
 
 }

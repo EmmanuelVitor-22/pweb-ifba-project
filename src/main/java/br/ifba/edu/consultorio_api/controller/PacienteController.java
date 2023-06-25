@@ -3,6 +3,7 @@ package br.ifba.edu.consultorio_api.controller;
 import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
 import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
+import br.ifba.edu.consultorio_api.dto.request.update.PacienteUpdateDTO;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 import br.ifba.edu.consultorio_api.service.PacienteService;
 import jakarta.transaction.Transactional;
@@ -48,22 +49,23 @@ public class PacienteController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<?> atualizarPaciente(@PathVariable Long id, @RequestBody PacienteDTO pacienteDTO) {
-        ResponseEntity<?> responseEntity = pacienteService.atualizarPacientes(id, pacienteDTO);
+    public ResponseEntity<PacienteUpdateDTO> atualizarPaciente(@PathVariable Long id, @RequestBody PacienteUpdateDTO pacienteUpdateDTO) {
+        return pacienteService.atualizarPacientes(id, pacienteUpdateDTO);
+//        ResponseEntity<?> responseEntity = pacienteService.atualizarPacientes(id, pacienteUpdateDTO);
 
-        if (responseEntity.getBody() instanceof PacienteDTO) {
-            PacienteDTO pacienteAtualizado = (PacienteDTO) responseEntity.getBody();
-            return ResponseEntity.ok(pacienteAtualizado);
-        } else {
-            String errorMessage = (String) responseEntity.getBody();
-            return ResponseEntity.badRequest().body(errorMessage);
-        }
+//        if (responseEntity.getBody() instanceof PacienteDTO) {
+//            PacienteDTO pacienteAtualizado = (PacienteDTO) responseEntity.getBody();
+//            return ResponseEntity.ok(pacienteAtualizado);
+//        } else {
+//            String errorMessage = (String) responseEntity.getBody();
+//            return ResponseEntity.badRequest().body(errorMessage);
+//        }
     }
 
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> deletarPaciente(@PathVariable Long id) {
+    public ResponseEntity<PacienteUpdateDTO> deletarPaciente(@PathVariable Long id) {
         boolean pacienteDeletado = pacienteService.deletarPaciente(id);
         if (pacienteDeletado) {
             return ResponseEntity.noContent().build();
