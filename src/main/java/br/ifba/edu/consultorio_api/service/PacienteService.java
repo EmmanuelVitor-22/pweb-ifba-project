@@ -1,6 +1,7 @@
 package br.ifba.edu.consultorio_api.service;
 
 import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
+import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 import br.ifba.edu.consultorio_api.repository.PacienteRepository;
@@ -33,7 +34,7 @@ public class PacienteService {
     public ResponseEntity<List<PacienteResponseDTO>> listarPorNomePaciente(String nome) {
         return ResponseEntity.ok(pacienteRepository.findByNome(nome)
                 .stream()
-                .map(paciente -> new PacienteResponseDTO(paciente.nome(), paciente.CPF(), paciente.email()))
+                .map(paciente -> new PacienteResponseDTO(paciente.nome(), paciente.CPF(), paciente.email(), paciente.endereco()))
                 .collect(Collectors.toList()));
     }
 
@@ -61,6 +62,28 @@ public class PacienteService {
         var pacienteDtoAtualizado = new PacienteDTO(paciente);
         return ResponseEntity.ok().body(pacienteDtoAtualizado);
     }
+    public ResponseEntity<?> atualizarPacientes2(Long id, PacienteDTO pacienteDTO) {
+        return pacienteRepository.findById(id).map(paciente -> {
+            // Verificar se houve tentativa de alteração do e-mail
+            if (!pacienteDTO.email().equals(paciente.getEmail())) {
+                return ResponseEntity.badRequest().body("Não é permitido alterar o e-mail do paciente.");
+            }
+
+            // Verificar se houve tentativa de alteração do CPF
+            if (!pacienteDTO.CPF().equals(paciente.getCPF())) {
+                return ResponseEntity.badRequest().body("Não é permitido alterar o CPF do paciente.");
+            }
+
+            // Atualizar os demais campos do paciente
+            paciente.setNome(pacienteDTO.nome());
+            paciente.setTelefone(pacienteDTO.telefone());
+            paciente.setEndereco(pacienteDTO.endereco());
+            pacienteRepository.save(paciente);
+
+            return ResponseEntity.ok().body(pacienteDTO);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
 
 }
 

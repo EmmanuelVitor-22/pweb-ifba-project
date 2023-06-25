@@ -1,9 +1,11 @@
 package br.ifba.edu.consultorio_api.controller;
 
 import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
+import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 import br.ifba.edu.consultorio_api.service.PacienteService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,9 +45,23 @@ public class PacienteController {
         return pacienteService.inserirPaciente(pacienteDTO, builder);
     }
 
-    @PutMapping("/{id}")
+//    @PutMapping("/{id}")
+//
+//        public ResponseEntity<PacienteDTO> atualizarPaciente(@PathVariable  Long id, @RequestBody PacienteDTO pacienteDTO) {
+//        return pacienteService.atualizarPaciente(id, pacienteDTO);
+//    }
 
-        public ResponseEntity<PacienteDTO> atualizarPaciente(@PathVariable  Long id, @RequestBody PacienteDTO pacienteDTO) {
-        return pacienteService.atualizarPaciente(id, pacienteDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizarPaciente(@PathVariable Long id, @RequestBody PacienteDTO pacienteDTO) {
+        ResponseEntity<?> responseEntity = pacienteService.atualizarPacientes2(id, pacienteDTO);
+
+        if (responseEntity.getBody() instanceof PacienteDTO) {
+            PacienteDTO pacienteAtualizado = (PacienteDTO) responseEntity.getBody();
+            return ResponseEntity.ok(pacienteAtualizado);
+        } else {
+            String errorMessage = (String) responseEntity.getBody();
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
     }
+
 }
