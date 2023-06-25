@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,7 +35,7 @@ public class PacienteService {
     public ResponseEntity<List<PacienteResponseDTO>> listarPorNomePaciente(String nome) {
         return ResponseEntity.ok(pacienteRepository.findByNome(nome)
                 .stream()
-                .map(paciente -> new PacienteResponseDTO(paciente.nome(), paciente.CPF(), paciente.email(), paciente.endereco()))
+                .map(paciente -> new PacienteResponseDTO(paciente.id(),paciente.nome(), paciente.CPF(), paciente.status() ,paciente.email(), paciente.endereco()))
                 .collect(Collectors.toList()));
     }
 
@@ -55,25 +56,16 @@ public class PacienteService {
         return ResponseEntity.created(uri).body(pacienteDTO);
     }
 
-    public ResponseEntity<PacienteDTO> atualizarPaciente(Long id, PacienteDTO pacienteDTO) {
-        var data = new Paciente(pacienteDTO);
-        data.setId(id);
-        var paciente = pacienteRepository.save(data);
-        var pacienteDtoAtualizado = new PacienteDTO(paciente);
-        return ResponseEntity.ok().body(pacienteDtoAtualizado);
-    }
-    public ResponseEntity<?> atualizarPacientes2(Long id, PacienteDTO pacienteDTO) {
+    public ResponseEntity<?> atualizarPacientes(Long id, PacienteDTO pacienteDTO) {
         return pacienteRepository.findById(id).map(paciente -> {
             // Verificar se houve tentativa de alteração do e-mail
             if (!pacienteDTO.email().equals(paciente.getEmail())) {
                 return ResponseEntity.badRequest().body("Não é permitido alterar o e-mail do paciente.");
             }
-
             // Verificar se houve tentativa de alteração do CPF
             if (!pacienteDTO.CPF().equals(paciente.getCPF())) {
                 return ResponseEntity.badRequest().body("Não é permitido alterar o CPF do paciente.");
             }
-
             // Atualizar os demais campos do paciente
             paciente.setNome(pacienteDTO.nome());
             paciente.setTelefone(pacienteDTO.telefone());
@@ -84,6 +76,19 @@ public class PacienteService {
         }).orElse(ResponseEntity.notFound().build());
     }
 
+
+
+    public boolean deletarPaciente(Long id) {
+        Optional<Paciente> pacienteOptional = pacienteRepository.findById(id);
+        if (pacienteOptional.isPresent()) {
+            Paciente paciente = pacienteOptional.get();
+            paciente.setStatus(false);
+            pacienteRepository.save(paciente);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
 

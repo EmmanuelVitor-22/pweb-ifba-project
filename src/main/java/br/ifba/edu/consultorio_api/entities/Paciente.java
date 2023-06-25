@@ -26,7 +26,7 @@ public class Paciente {
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
-    @CPF
+//    @CPF
     private String CPF;
     @Column(nullable = false)
     @Email

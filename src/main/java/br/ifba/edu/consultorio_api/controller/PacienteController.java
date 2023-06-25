@@ -45,15 +45,11 @@ public class PacienteController {
         return pacienteService.inserirPaciente(pacienteDTO, builder);
     }
 
-//    @PutMapping("/{id}")
-//
-//        public ResponseEntity<PacienteDTO> atualizarPaciente(@PathVariable  Long id, @RequestBody PacienteDTO pacienteDTO) {
-//        return pacienteService.atualizarPaciente(id, pacienteDTO);
-//    }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> atualizarPaciente(@PathVariable Long id, @RequestBody PacienteDTO pacienteDTO) {
-        ResponseEntity<?> responseEntity = pacienteService.atualizarPacientes2(id, pacienteDTO);
+        ResponseEntity<?> responseEntity = pacienteService.atualizarPacientes(id, pacienteDTO);
 
         if (responseEntity.getBody() instanceof PacienteDTO) {
             PacienteDTO pacienteAtualizado = (PacienteDTO) responseEntity.getBody();
@@ -63,5 +59,23 @@ public class PacienteController {
             return ResponseEntity.badRequest().body(errorMessage);
         }
     }
+
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> deletarPaciente(@PathVariable Long id) {
+        boolean pacienteDeletado = pacienteService.deletarPaciente(id);
+        if (pacienteDeletado) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+//    public ResponseEntity<?> deletarPaciente(@PathVariable Long id) {
+//        return ResponseEntity.noContent().build();
+//    }
+
+
 
 }
