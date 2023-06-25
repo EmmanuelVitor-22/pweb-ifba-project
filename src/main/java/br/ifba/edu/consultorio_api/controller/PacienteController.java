@@ -25,14 +25,15 @@ public class PacienteController {
     @Autowired
     PacienteService pacienteService;
 
-    @GetMapping("/teste")
+    @GetMapping("/listar")
     public ResponseEntity<Page<PacienteResponseDTO>> listarPacientes(
             @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
         Page<PacienteResponseDTO> pacientesDTO = pacienteService.listarPacientesOrdenadosEPageados(pageable);
         return ResponseEntity.ok(pacientesDTO);
     }
 
-    @GetMapping("/buscar-por-nome")
+
+    @GetMapping("/buscar-por-nome/{nome}")
     public ResponseEntity<List<PacienteResponseDTO>> buscarPorNome(@RequestParam("nome") String nome) {
         return pacienteService.listarPorNomePaciente(nome);
     }
@@ -47,7 +48,8 @@ public class PacienteController {
     }
 
 
-    @PutMapping("/{id}")
+
+    @PutMapping("/atualizar/{id}")
     @Transactional
     public ResponseEntity<PacienteUpdateDTO> atualizarPaciente(@PathVariable Long id, @RequestBody PacienteUpdateDTO pacienteUpdateDTO) {
         return pacienteService.atualizarPacientes(id, pacienteUpdateDTO);
@@ -63,7 +65,7 @@ public class PacienteController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     @Transactional
     public ResponseEntity<PacienteUpdateDTO> deletarPaciente(@PathVariable Long id) {
         boolean pacienteDeletado = pacienteService.deletarPaciente(id);
