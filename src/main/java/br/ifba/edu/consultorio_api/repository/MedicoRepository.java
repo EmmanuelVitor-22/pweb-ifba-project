@@ -10,9 +10,7 @@ import java.util.UUID;
 
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
      Optional<Medico> findByNome(String nome);
-
-     List<Medico> findAllByStatusTrue();
-//     List<Medico> findByConsultasDataHoraNot(LocalDateTime dataHora);
+     List<Medico> findByConsultasDataHoraNot(LocalDateTime dataHora);
 
 
 }
