@@ -45,7 +45,7 @@ public class MedicoService {
         return ResponseEntity.created(uri).body(medicoDTO);
     }
 
-//    public ResponseEntity<MedicoDTO> atualizarMedicos(Long id, MedicoDTO medicoDTO) {
+    //    public ResponseEntity<MedicoDTO> atualizarMedicos(Long id, MedicoDTO medicoDTO) {
 //        var data = new Medico(medicoDTO);
 //        data.setId(id);
 //        var medico = medicoRepository.save(data);
@@ -97,6 +97,11 @@ public class MedicoService {
         } else {
             return false;
         }
+    }
+
+    public Medico buscarMedicoPorId(Long medicoId) {
+        return medicoRepository.findById(medicoId)
+                .orElseThrow(() -> new RuntimeException("Médico não encontrado."));
     }
 
 }

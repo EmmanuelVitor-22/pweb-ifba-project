@@ -2,6 +2,7 @@ package br.ifba.edu.consultorio_api.entities;
 
 import br.ifba.edu.consultorio_api.dto.request.ConsultaDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,10 +24,12 @@ public class Consulta {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
+    @NotNull(message = "O ID do medico é obrigatório")
     public Medico medico;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
+    @NotNull(message = "O ID do paciente é obrigatório")
     private Paciente paciente;
     @Column
     private LocalDateTime data_hora;

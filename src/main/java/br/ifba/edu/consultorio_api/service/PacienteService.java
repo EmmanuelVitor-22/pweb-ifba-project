@@ -55,7 +55,7 @@ public class PacienteService {
         return ResponseEntity.created(uri).body(pacienteDTO);
     }
 
-//    public ResponseEntity<?> atualizarPacientes(Long id, PacienteDTO pacienteDTO) {
+    //    public ResponseEntity<?> atualizarPacientes(Long id, PacienteDTO pacienteDTO) {
 //        return pacienteRepository.findById(id).map(paciente -> {
 //            // Verificar se houve tentativa de alteração do e-mail
 //            if (!pacienteDTO.email().equals(paciente.getEmail())) {
@@ -74,7 +74,6 @@ public class PacienteService {
 //            return ResponseEntity.ok().body(pacienteDTO);
 //        }).orElse(ResponseEntity.notFound().build());
 //    }
-
     public ResponseEntity<PacienteUpdateDTO> atualizarPacientes(Long id, PacienteUpdateDTO pacienteUpdateDTO) {
         Optional<Paciente> pacienteOptional = pacienteRepository.findById(id);
         if (pacienteOptional.isPresent()){
@@ -97,8 +96,6 @@ public class PacienteService {
 //            return ResponseEntity.ok().body(pacienteUpdateDTO);
 //        }).orElse(ResponseEntity.notFound().build());
 //    }
-
-
     public boolean deletarPaciente(Long id) {
         Optional<Paciente> pacienteOptional = pacienteRepository.findById(id);
         if (pacienteOptional.isPresent()) {
@@ -109,6 +106,11 @@ public class PacienteService {
         } else {
             return false;
         }
+    }
+
+    public Paciente buscarPacientePorId(Long pacienteId) {
+        return pacienteRepository.findById(pacienteId)
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado."));
     }
 
 }
