@@ -12,5 +12,6 @@ import java.util.UUID;
 public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
     List<Consulta> findByMedicoAndDataHora(Medico medico, LocalDateTime dataHora);
     List<Consulta> findByPacienteAndData(Paciente paciente, LocalDateTime dataHora);
-
+    boolean existsByMedicoAndDataHora(Medico medico, LocalDateTime dataHora);
+    boolean existsByPacienteAndDataHoraBetween(Paciente paciente, LocalDateTime startDateTime, LocalDateTime endDateTime);
 }
