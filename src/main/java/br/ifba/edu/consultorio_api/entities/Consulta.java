@@ -1,6 +1,7 @@
 package br.ifba.edu.consultorio_api.entities;
 
 import br.ifba.edu.consultorio_api.dto.request.ConsultaDTO;
+import br.ifba.edu.consultorio_api.dto.response.ConsultaResponseDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -38,10 +39,14 @@ public class Consulta {
 
 
     public Consulta(ConsultaDTO consultaDTO) {
-        this.id = consultaDTO.id();
         this.medico = consultaDTO.medico();
         this.paciente = consultaDTO.paciente();
         this.data_hora = consultaDTO.data_hora();
     }
-
+    public Consulta(ConsultaResponseDTO consultaDTO) {
+        this.id =  consultaDTO.id();
+        this.medico = consultaDTO.medico();
+        this.paciente = consultaDTO.paciente();
+        this.data_hora = consultaDTO.data_hora();
+    }
 }

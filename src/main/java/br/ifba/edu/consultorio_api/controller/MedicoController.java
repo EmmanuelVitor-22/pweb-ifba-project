@@ -20,7 +20,7 @@ public class MedicoController {
     @Autowired
     private MedicoService medicoService;
 
-    @GetMapping
+    @GetMapping("/medicos")
     public ResponseEntity<List<MedicoResponseDTO>> listarMedicos() {
         return medicoService.listarTodosMedicos();
     }

@@ -1,5 +1,6 @@
 package br.ifba.edu.consultorio_api.utils;
 
+import br.ifba.edu.consultorio_api.dto.response.MedicoResponseDTO;
 import br.ifba.edu.consultorio_api.entities.Medico;
 
 import java.util.List;
@@ -14,7 +15,6 @@ public class MedicoUtilRandon {
             throw new RuntimeException("Não há médicos disponíveis para agendamento.");
         }
     }
-
 
 }
 

@@ -38,10 +38,12 @@ public class MedicoService {
                 .map(MedicoResponseDTO::new)
                 .collect(Collectors.toList()));
     }
-
+    public List<Medico> listarTodos() {
+        return medicoRepository.findAll();
+    }
     public ResponseEntity<MedicoDTO> criarMedicos(MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         var medico = medicoRepository.save(new Medico(medicoDTO));
-        var uri = builder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+        var uri = builder.path("/medicos").buildAndExpand(medico.getId()).toUri();
         return ResponseEntity.created(uri).body(medicoDTO);
     }
 

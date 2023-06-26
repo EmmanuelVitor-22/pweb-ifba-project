@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record ConsultaDTO(
-        Long id,
+
         Medico medico,
         Paciente paciente,
 
@@ -17,7 +17,6 @@ public record ConsultaDTO(
 ) {
         public ConsultaDTO(Consulta consulta) {
                 this(
-                                consulta.getId(),
                                 consulta.getMedico(),
                                 consulta.getPaciente(),
                                 consulta.getData_hora());
