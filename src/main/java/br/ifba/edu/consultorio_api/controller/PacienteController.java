@@ -1,10 +1,8 @@
 package br.ifba.edu.consultorio_api.controller;
 
 import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
-import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.dto.request.PacienteDTO;
 import br.ifba.edu.consultorio_api.dto.request.update.PacienteUpdateDTO;
-import br.ifba.edu.consultorio_api.entities.Paciente;
 import br.ifba.edu.consultorio_api.service.PacienteService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -33,8 +31,7 @@ public class PacienteController {
         return ResponseEntity.ok(pacientesDTO);
     }
 
-
-    @GetMapping("/buscar-por-nome/{nome}")
+    @GetMapping("/buscar-por-nome/{nome}{letra}")
     public ResponseEntity<List<PacienteResponseDTO>> buscarPorNome(@RequestParam("nome") String nome) {
         return pacienteService.listarPorNomePaciente(nome);
     }
@@ -43,7 +40,7 @@ public class PacienteController {
         return  pacienteService.listarPorLetraPaciente(letra);
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<PacienteDTO> inserirPaciente(@RequestBody @Valid PacienteDTO pacienteDTO, UriComponentsBuilder builder) {
         return pacienteService.inserirPaciente(pacienteDTO, builder);
     }

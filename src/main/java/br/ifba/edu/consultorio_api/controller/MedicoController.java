@@ -20,13 +20,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping(  "/")
+@RequestMapping("/medicos")
 public class MedicoController {
 
     @Autowired
     private MedicoService medicoService;
 
-    @GetMapping("/medicos")
+    @GetMapping("/listar")
     public ResponseEntity<List<MedicoResponseDTO>> listarMedicos() {
         return medicoService.listarTodosMedicos();
     }
@@ -38,17 +38,17 @@ public class MedicoController {
         return ResponseEntity.ok(medicoResponseDTO);
     }
 
-    @PostMapping
+    @PostMapping("cadastrar")
     public ResponseEntity<MedicoDTO> criarMedico(@RequestBody @Valid MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         return medicoService.criarMedicos(medicoDTO, builder);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     @Transactional
     public ResponseEntity<MedicoUpdateDTO> atualizarMedicos(@PathVariable Long id, @RequestBody @Valid MedicoUpdateDTO medicoUpdateDTO) {
         return medicoService.atualizarMedicos(id, medicoUpdateDTO);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     @Transactional
     public ResponseEntity<MedicoUpdateDTO> deletarPaciente(@PathVariable Long id) {
         boolean medicoDeletado = medicoService.deletarMedico(id);
