@@ -42,10 +42,16 @@ public class MedicoService {
                 .map(MedicoResponseDTO::new)
                 .collect(Collectors.toList()));
     }
-    public Page<MedicoResponseDTO> listarMedicosOrdenadosEPageados(Pageable pageable) {
-        Page<Medico> medicos = medicoRepository.findAll(pageable);
+//    public Page<MedicoResponseDTO> listarMedicosOrdenadosEPageados(Pageable pageable) {
+//        Page<Medico> medicos = medicoRepository.findAll(pageable);
+//        return medicos.map(MedicoResponseDTO::new);
+//    }
+
+    public Page<MedicoResponseDTO> listarMedicosOrdenados(Pageable pageable) {
+        Page<Medico> medicos = medicoRepository.findAllOrderByNomeIgnoringPrefix(pageable);
         return medicos.map(MedicoResponseDTO::new);
     }
+
     public ResponseEntity<MedicoDTO> criarMedicos(MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         var medico = medicoRepository.save(new Medico(medicoDTO));
         var uri = builder.path("/medicos").buildAndExpand(medico.getId()).toUri();

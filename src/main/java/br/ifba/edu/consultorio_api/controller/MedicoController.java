@@ -30,12 +30,14 @@ public class MedicoController {
     public ResponseEntity<List<MedicoResponseDTO>> listarMedicos() {
         return medicoService.listarTodosMedicos();
     }
-    @GetMapping("/listar")
-    public ResponseEntity<Page<MedicoResponseDTO>> listarMedicosOrdenadosOageados(
+
+    @GetMapping("/ordenados")
+    public ResponseEntity<Page<MedicoResponseDTO>> listarMedicosOrdenadosPaginados(
             @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
-        Page<MedicoResponseDTO> medicoResponseDTO = medicoService.listarMedicosOrdenadosEPageados(pageable);
+        Page<MedicoResponseDTO> medicoResponseDTO = medicoService.listarMedicosOrdenados(pageable);
         return ResponseEntity.ok(medicoResponseDTO);
     }
+
     @PostMapping
     public ResponseEntity<MedicoDTO> criarMedico(@RequestBody @Valid MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         return medicoService.criarMedicos(medicoDTO, builder);
