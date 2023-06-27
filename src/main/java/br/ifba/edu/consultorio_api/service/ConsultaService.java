@@ -2,6 +2,7 @@ package br.ifba.edu.consultorio_api.service;
 
 import br.ifba.edu.consultorio_api.dto.request.ConsultaDTO;
 import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
+import br.ifba.edu.consultorio_api.dto.request.cancel.ConsultaCancelDTO;
 import br.ifba.edu.consultorio_api.dto.request.create.ConsultaCreateDTO;
 
 import br.ifba.edu.consultorio_api.entities.Consulta;
@@ -20,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,8 +62,22 @@ public class ConsultaService {
 
         return consultaDTO;
     }
+    public ConsultaDTO cancelarConsulta (ConsultaCancelDTO consultaCancelDTO){
+        Consulta consulta = consultaRepository.findById(consultaCancelDTO.consultaId())
+                                              .orElseThrow(() -> new ValidationException("Consulta não encontrada"));
+        var agora = LocalDateTime.now();
+        var diferencaEmHoras = Duration.between(agora, consulta.getDataHora()).toHours();
 
+        if (diferencaEmHoras < 24) {
+            throw new ValidationException("Consulta somente pode ser cancelada com antecedência mínima de 24h!");
+        }
+        consulta.setCancelamento(consultaCancelDTO.cancelamento());
+        consulta.setStatus(false);
+        consultaRepository.save(consulta);
+        return  null;
+    }
     public Medico adicionarMedico(ConsultaCreateDTO consultaCreateDTO) {
+       //verifica se o medico foi inserido (manualmente)
         if (consultaCreateDTO.medicoId() != null){
             Medico medico = medicoRepository.findById(consultaCreateDTO.medicoId())
                     .orElseThrow(() -> new ValidationException("Medico não encontrado"));
@@ -90,7 +106,6 @@ public class ConsultaService {
             throw new ValidationException("Médico ja possui outra consulta agendada nesse mesmo horário");
         }
     }
-
     public ResponseEntity<List<ConsultaDTO>> listarTudo(){
         return ResponseEntity.ok( consultaRepository.findAll().stream().map(ConsultaDTO::new).collect(Collectors.toList()));
     }

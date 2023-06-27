@@ -12,8 +12,8 @@ import java.util.UUID;
 
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
      Optional<Medico> findByNome(String nome);
-//     List<Medico> findByConsultasDataHoraNot(LocalDateTime dataHora);
 
-     @Query(value = "SELECT m FROM medico m WHERE m.status = TRUE AND m.id NOT IN (SELECT c.medico.id FROM consulta c WHERE c.dataHora = :data and c.cancelamento is null) ORDER BY RAND() FETCH FIRST 1 ROW ONLY")
+     //gera o aleatorio(medico)
+     @Query(value = "SELECT m FROM medico m WHERE m.status = TRUE AND m.id NOT IN (SELECT c.medico.id FROM consulta c WHERE c.dataHora = :data and c.cancelamento is null) ORDER BY RANDOM() FETCH FIRST 1 ROW ONLY")
      Optional<Medico> medicoAleatorioLivreNaData(@Param("data") LocalDateTime localDateTime);
 }

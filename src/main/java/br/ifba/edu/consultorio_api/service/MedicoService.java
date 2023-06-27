@@ -1,5 +1,6 @@
 package br.ifba.edu.consultorio_api.service;
 
+import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
 import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.dto.request.update.MedicoUpdateDTO;
 import br.ifba.edu.consultorio_api.dto.response.MedicoResponseDTO;
@@ -7,6 +8,8 @@ import br.ifba.edu.consultorio_api.entities.Medico;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 import br.ifba.edu.consultorio_api.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -38,8 +41,9 @@ public class MedicoService {
                 .map(MedicoResponseDTO::new)
                 .collect(Collectors.toList()));
     }
-    public List<Medico> listarTodos() {
-        return medicoRepository.findAll();
+    public Page<MedicoResponseDTO> listarMedicosOrdenadosEPageados(Pageable pageable) {
+        Page<Medico> medicos = medicoRepository.findAll(pageable);
+        return medicos.map(MedicoResponseDTO::new);
     }
     public ResponseEntity<MedicoDTO> criarMedicos(MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         var medico = medicoRepository.save(new Medico(medicoDTO));
