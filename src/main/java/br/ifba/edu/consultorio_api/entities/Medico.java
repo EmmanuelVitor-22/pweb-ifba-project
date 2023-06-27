@@ -25,8 +25,6 @@ public class Medico {
     @Column(nullable = false)
     private String CRM;
     @Column(nullable = false)
-    @NotBlank
-    @Email
     private String email;
     @Column(nullable = false)
     private String telefone;
@@ -46,6 +44,6 @@ public class Medico {
         this.email = medicoDTO.email();
         this.telefone = medicoDTO.telefone();
         this.especialidade = medicoDTO.especialidade();
-        this.endereco = medicoDTO.endereco();
+        this.endereco = new Endereco(medicoDTO.endereco());
     }
 }

@@ -27,10 +27,9 @@ public class Paciente {
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
-//    @CPF
+    //@CPF
     private String CPF;
     @Column(nullable = false)
-    @Email
     private String email;
     @Column(nullable = false)
     private String telefone;
@@ -46,12 +45,12 @@ public class Paciente {
         this.CPF = pacienteDTO.CPF();
         this.email = pacienteDTO.email();
         this.telefone = pacienteDTO.telefone();
-        this.endereco = pacienteDTO.endereco();
+        this.endereco = new Endereco(pacienteDTO.endereco());
     }
     public Paciente(PacienteUpdateDTO pacienteUpdateDTO) {
         this.nome = pacienteUpdateDTO.nome();
         this.telefone = pacienteUpdateDTO.telefone();
-        this.endereco = pacienteUpdateDTO.endereco();
+        this.endereco = new Endereco(pacienteUpdateDTO.endereco());
     }
 
 }

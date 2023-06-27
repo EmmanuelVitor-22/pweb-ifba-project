@@ -7,6 +7,7 @@ import br.ifba.edu.consultorio_api.dto.request.update.PacienteUpdateDTO;
 import br.ifba.edu.consultorio_api.dto.response.MedicoResponseDTO;
 import br.ifba.edu.consultorio_api.service.MedicoService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,13 +37,13 @@ public class MedicoController {
         return ResponseEntity.ok(medicoResponseDTO);
     }
     @PostMapping
-    public ResponseEntity<MedicoDTO> criarMedico(@RequestBody MedicoDTO medicoDTO, UriComponentsBuilder builder) {
+    public ResponseEntity<MedicoDTO> criarMedico(@RequestBody @Valid MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         return medicoService.criarMedicos(medicoDTO, builder);
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<MedicoUpdateDTO> atualizarMedicos(@PathVariable Long id, @RequestBody MedicoUpdateDTO medicoUpdateDTO) {
+    public ResponseEntity<MedicoUpdateDTO> atualizarMedicos(@PathVariable Long id, @RequestBody @Valid MedicoUpdateDTO medicoUpdateDTO) {
         return medicoService.atualizarMedicos(id, medicoUpdateDTO);
     }
     @DeleteMapping("/{id}")
@@ -56,15 +57,5 @@ public class MedicoController {
         }
     }
 
-//    @PutMapping("medicos/geral/{id}")
-//    @Transactional
-//    public ResponseEntity<MedicoDTO> atualizarGeral(@PathVariable Long id, @RequestBody MedicoDTO medicoDTO) {
-//        return medicoService.atualizarMedicos(id, medicoDTO);
-//    }
-//
-//    @PutMapping("{id}")
-//    @Transactional
-//    public ResponseEntity<MedicoDTO> atualizarNome(@PathVariable Long id, @RequestBody MedicoDTO medicoDTO) {
-//        return medicoService.atualizarMedicos(id, medicoDTO);
-//    }
+
 }

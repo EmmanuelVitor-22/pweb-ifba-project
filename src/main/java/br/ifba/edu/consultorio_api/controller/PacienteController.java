@@ -7,6 +7,7 @@ import br.ifba.edu.consultorio_api.dto.request.update.PacienteUpdateDTO;
 import br.ifba.edu.consultorio_api.entities.Paciente;
 import br.ifba.edu.consultorio_api.service.PacienteService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,27 +44,15 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<PacienteDTO> inserirPaciente(@RequestBody PacienteDTO pacienteDTO, UriComponentsBuilder builder) {
+    public ResponseEntity<PacienteDTO> inserirPaciente(@RequestBody @Valid PacienteDTO pacienteDTO, UriComponentsBuilder builder) {
         return pacienteService.inserirPaciente(pacienteDTO, builder);
     }
 
-
-
     @PutMapping("/atualizar/{id}")
     @Transactional
-    public ResponseEntity<PacienteUpdateDTO> atualizarPaciente(@PathVariable Long id, @RequestBody PacienteUpdateDTO pacienteUpdateDTO) {
+    public ResponseEntity<PacienteUpdateDTO> atualizarPaciente(@PathVariable Long id, @RequestBody @Valid PacienteUpdateDTO pacienteUpdateDTO) {
         return pacienteService.atualizarPacientes(id, pacienteUpdateDTO);
-//        ResponseEntity<?> responseEntity = pacienteService.atualizarPacientes(id, pacienteUpdateDTO);
-
-//        if (responseEntity.getBody() instanceof PacienteDTO) {
-//            PacienteDTO pacienteAtualizado = (PacienteDTO) responseEntity.getBody();
-//            return ResponseEntity.ok(pacienteAtualizado);
-//        } else {
-//            String errorMessage = (String) responseEntity.getBody();
-//            return ResponseEntity.badRequest().body(errorMessage);
-//        }
     }
-
 
     @DeleteMapping("/deletar/{id}")
     @Transactional
@@ -75,11 +64,5 @@ public class PacienteController {
             return ResponseEntity.notFound().build();
         }
     }
-
-//    public ResponseEntity<?> deletarPaciente(@PathVariable Long id) {
-//        return ResponseEntity.noContent().build();
-//    }
-
-
 
 }

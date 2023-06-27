@@ -22,19 +22,14 @@ import java.time.LocalDateTime;
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
-    @NotNull(message = "O ID do medico é obrigatório")
     public Medico medico;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
-    @NotNull(message = "O ID do paciente é obrigatório")
     private Paciente paciente;
-    @Column
+    @Column(nullable = false)
     private LocalDateTime dataHora;
     private boolean status = true;
     @Enumerated(EnumType.STRING)

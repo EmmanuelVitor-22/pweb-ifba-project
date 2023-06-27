@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record ConsultaCancelDTO(
-        @NotNull
+        @NotNull(message = "Consulta não pode ser nulo")
         Long consultaId,
         @NotNull
         MotivoCancelamento cancelamento
