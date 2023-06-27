@@ -19,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/pacientes")
+@RequestMapping( "/pacientes")
 public class PacienteController {
 
     @Autowired

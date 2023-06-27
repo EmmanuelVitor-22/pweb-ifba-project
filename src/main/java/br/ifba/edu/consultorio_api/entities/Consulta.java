@@ -1,7 +1,9 @@
 package br.ifba.edu.consultorio_api.entities;
 
 import br.ifba.edu.consultorio_api.dto.request.ConsultaDTO;
+import br.ifba.edu.consultorio_api.dto.request.create.ConsultaCreateDTO;
 import br.ifba.edu.consultorio_api.dto.response.ConsultaResponseDTO;
+import br.ifba.edu.consultorio_api.enuns.MotivoCancelamento;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -33,20 +35,21 @@ public class Consulta {
     @NotNull(message = "O ID do paciente é obrigatório")
     private Paciente paciente;
     @Column
-    private LocalDateTime data_hora;
+    private LocalDateTime dataHora;
     private boolean status = true;
-    private String cancelamento;
-
+    @Enumerated(EnumType.STRING)
+    private MotivoCancelamento cancelamento;
 
     public Consulta(ConsultaDTO consultaDTO) {
         this.medico = consultaDTO.medico();
         this.paciente = consultaDTO.paciente();
-        this.data_hora = consultaDTO.data_hora();
+        this.dataHora = consultaDTO.dataHora();
     }
     public Consulta(ConsultaResponseDTO consultaDTO) {
         this.id =  consultaDTO.id();
         this.medico = consultaDTO.medico();
         this.paciente = consultaDTO.paciente();
-        this.data_hora = consultaDTO.data_hora();
+        this.dataHora = consultaDTO.dataHora();
     }
+   
 }

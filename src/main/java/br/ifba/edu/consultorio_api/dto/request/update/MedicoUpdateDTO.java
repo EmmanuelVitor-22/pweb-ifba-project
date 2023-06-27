@@ -1,7 +1,6 @@
 package br.ifba.edu.consultorio_api.dto.request.update;
 
 import br.ifba.edu.consultorio_api.entities.Endereco;
-import br.ifba.edu.consultorio_api.entities.Especialidade;
 import br.ifba.edu.consultorio_api.entities.Medico;
 
 public record MedicoUpdateDTO(

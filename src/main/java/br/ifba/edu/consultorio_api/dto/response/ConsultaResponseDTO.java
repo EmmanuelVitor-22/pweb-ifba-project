@@ -11,13 +11,13 @@ public record ConsultaResponseDTO(
         Medico medico,
         Paciente paciente,
 
-        LocalDateTime data_hora
+        LocalDateTime dataHora
 ) {
     public ConsultaResponseDTO(Consulta consulta) {
         this(
                 consulta.getId(),
                 consulta.getMedico(),
                 consulta.getPaciente(),
-                consulta.getData_hora());
+                consulta.getDataHora());
     }
 }

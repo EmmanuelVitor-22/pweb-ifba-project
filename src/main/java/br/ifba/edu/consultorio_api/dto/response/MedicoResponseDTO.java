@@ -1,6 +1,6 @@
 package br.ifba.edu.consultorio_api.dto.response;
 
-import br.ifba.edu.consultorio_api.entities.Especialidade;
+import br.ifba.edu.consultorio_api.enuns.Especialidade;
 import br.ifba.edu.consultorio_api.entities.Medico;
 
 public record  MedicoResponseDTO(

@@ -12,14 +12,14 @@ public class ConsultaValidation {
 
     public static void validarConsultaUnicaPorDia(Paciente paciente, LocalDate dataConsulta, List<Consulta> consultas) {
         for (Consulta consulta : consultas) {
-            if (consulta.getPaciente().equals(paciente) && consulta.getData_hora().toLocalDate().equals(dataConsulta)) {
+            if (consulta.getPaciente().equals(paciente) && consulta.getDataHora().toLocalDate().equals(dataConsulta)) {
                 throw new ValidationException("Não é possível agendar a consulta. Já existe uma consulta marcada para o paciente nesse dia.");
             }
         }
     }
     public static void validarMedicoDisponivel(Medico medico, LocalDateTime dataHoraConsulta, List<Consulta> consultas) {
         for (Consulta consulta : consultas) {
-            if (consulta.getMedico().equals(medico) && consulta.getData_hora().equals(dataHoraConsulta)) {
+            if (consulta.getMedico().equals(medico) && consulta.getDataHora().equals(dataHoraConsulta)) {
                 throw new ValidationException("Não é possível agendar a consulta. O médico já possui outra consulta agendada na mesma data/hora.");
             }
         }

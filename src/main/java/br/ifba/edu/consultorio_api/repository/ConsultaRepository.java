@@ -13,11 +13,20 @@ import java.util.Optional;
 public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 //    List<Consulta> findByData(LocalDateTime localDateTime);
 
-    List<Consulta> findByMedico(Optional<Medico> medico);
+//    List<Consulta> findByMedico(Optional<Medico> medico);
+//
+//    List<Consulta> findByPaciente(Optional<Paciente> paciente);
+//    List<Consulta> findByMedicoAndData_Hora(Medico medico, LocalDateTime dataHora);
+//    List<Consulta> findByPacienteAndData(Paciente paciente, LocalDateTime dataHora);
+//    boolean existsByMedicoAndDataHora(Medico medico, LocalDateTime dataHora);
+//
+//    boolean existsByPacienteAndDataHoraBetween(Paciente paciente, LocalDateTime startDateTime, LocalDateTime endDateTime);
 
-    List<Consulta> findByPaciente(Optional<Paciente> paciente);
-    List<Consulta> findByMedicoAndData_Hora(Medico medico, LocalDateTime dataHora);
-    List<Consulta> findByPacienteAndData(Paciente paciente, LocalDateTime dataHora);
-    boolean existsByMedicoAndDataHora(Medico medico, LocalDateTime dataHora);
-    boolean existsByPacienteAndDataHoraBetween(Paciente paciente, LocalDateTime startDateTime, LocalDateTime endDateTime);
+    Boolean existsByCancelamentoNullAndPacienteIdAndDataHoraBetween(Long pacienteId, LocalDateTime primeiroHorario, LocalDateTime ultimoHorario);
+
+
+    Boolean existsByMedicoIdAndDataHoraAndCancelamentoIsNull(Long medicoId, LocalDateTime localDateTime);
+
+
+
 }
