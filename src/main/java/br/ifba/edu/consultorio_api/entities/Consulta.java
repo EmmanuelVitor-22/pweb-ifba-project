@@ -41,7 +41,7 @@ public class Consulta {
         this.dataHora = consultaDTO.dataHora();
     }
     public Consulta(ConsultaResponseDTO consultaDTO) {
-        this.id =  consultaDTO.id();
+
         this.medico = consultaDTO.medico();
         this.paciente = consultaDTO.paciente();
         this.dataHora = consultaDTO.dataHora();

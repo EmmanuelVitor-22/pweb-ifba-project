@@ -1,6 +1,6 @@
 package br.ifba.edu.consultorio_api.service;
 
-import br.ifba.edu.consultorio_api.dto.request.ConsultaDTO;
+import br.ifba.edu.consultorio_api.dto.response.ConsultaResponseDTO;
 import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.dto.request.cancel.ConsultaCancelDTO;
 import br.ifba.edu.consultorio_api.dto.request.create.ConsultaCreateDTO;
@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,7 +35,7 @@ public class ConsultaService {
     @Autowired
     private MedicoRepository medicoRepository;
 
-    public ConsultaDTO agendarConsulta(ConsultaCreateDTO consultaCreateDTO) {
+    public ConsultaResponseDTO agendarConsulta(ConsultaCreateDTO consultaCreateDTO) {
         HorarioFuncionamentoValidation.validarHorarioFuncionamento(consultaCreateDTO.dataHora());
         AntecedenciaMinimaValidation.validarAntecedenciaMinima(consultaCreateDTO.dataHora());
         validarSePacienteJaTemConsultaNoDiaEHora(consultaCreateDTO);
@@ -58,11 +57,11 @@ public class ConsultaService {
 
         consulta =  consultaRepository.save(consulta);
 
-        ConsultaDTO consultaDTO = new ConsultaDTO(consulta);
+        ConsultaResponseDTO consultaResponseDTO = new ConsultaResponseDTO(consulta);
 
-        return consultaDTO;
+        return consultaResponseDTO;
     }
-    public ConsultaDTO cancelarConsulta (ConsultaCancelDTO consultaCancelDTO){
+    public ConsultaResponseDTO cancelarConsulta (ConsultaCancelDTO consultaCancelDTO){
         Consulta consulta = consultaRepository.findById(consultaCancelDTO.consultaId())
                                               .orElseThrow(() -> new ValidationException("Consulta não encontrada"));
         var agora = LocalDateTime.now();
@@ -106,7 +105,7 @@ public class ConsultaService {
             throw new ValidationException("Médico ja possui outra consulta agendada nesse mesmo horário");
         }
     }
-    public ResponseEntity<List<ConsultaDTO>> listarTudo(){
-        return ResponseEntity.ok( consultaRepository.findAll().stream().map(ConsultaDTO::new).collect(Collectors.toList()));
+    public ResponseEntity<List<ConsultaResponseDTO>> listarTudo(){
+        return ResponseEntity.ok( consultaRepository.findAll().stream().map(ConsultaResponseDTO::new).collect(Collectors.toList()));
     }
 }

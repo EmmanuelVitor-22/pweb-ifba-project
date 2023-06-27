@@ -7,7 +7,6 @@ import br.ifba.edu.consultorio_api.entities.Paciente;
 import java.time.LocalDateTime;
 
 public record ConsultaResponseDTO(
-        Long id,
         Medico medico,
         Paciente paciente,
 
@@ -15,7 +14,6 @@ public record ConsultaResponseDTO(
 ) {
     public ConsultaResponseDTO(Consulta consulta) {
         this(
-                consulta.getId(),
                 consulta.getMedico(),
                 consulta.getPaciente(),
                 consulta.getDataHora());
