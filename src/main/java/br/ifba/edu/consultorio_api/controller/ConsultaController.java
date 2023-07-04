@@ -22,11 +22,13 @@ public class ConsultaController {
     public ResponseEntity<List<ConsultaResponseDTO>>  listarTudo(){
         return consultaService.listarTudo();
     }
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/agendar")
     @Transactional
     public ConsultaResponseDTO agendarConsulta(@RequestBody @Valid ConsultaCreateDTO consultaCreateDTO) {
         return consultaService.agendarConsulta(consultaCreateDTO);
     }
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/cancelar")
     @Transactional
     public ConsultaResponseDTO cancelarConsulta(@RequestBody @Valid ConsultaCancelDTO consultaCancelDTO){

@@ -6,18 +6,17 @@ import br.ifba.edu.consultorio_api.entities.Medico;
 public record  MedicoResponseDTO(
 
         String nome,
-        String CRM,
         String email,
-
-
+        String CRM,
         Especialidade especialidade) {
 
 
+   //Construtor que recebe um objeto Medico e cria um objeto MedicoResponseDTO com base nos dados do médico.
     public MedicoResponseDTO(Medico medico) {
         this(
                 medico.getNome(),
-                medico.getCRM(),
                 medico.getEmail(),
+                medico.getCRM(),
                 medico.getEspecialidade());
     }
 }

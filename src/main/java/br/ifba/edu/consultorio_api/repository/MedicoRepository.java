@@ -14,9 +14,15 @@ import java.util.UUID;
 
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
      Optional<Medico> findByNome(String nome);
-     // Consulta personalizada para ordenar os médicos pelo nome, ignorando o prefixo "Dr." ou "Dra."
-     @Query("SELECT m FROM medico m ORDER BY FUNCTION('regexp_replace', m.nome, '^Dr\\.\\s*|^Dra\\.\\s*', '', 'g')")
+     // Consulta personalizada para ordenar os médicos pelo nome, ignorando o prefixo "Dr." ou "Dra." (POSTGRES)
+     // @Query("SELECT m FROM medico m ORDER BY FUNCTION('regexp_replace', m.nome, '^Dr\\.\\s*|^Dra\\.\\s*', '', 'g')")
+     //Page<Medico> findAllOrderByNomeIgnoringPrefix(Pageable pageable);
+
+     // Consulta personalizada para ordenar os médicos pelo nome, ignorando o prefixo "Dr." ou "Dra." (H2)
+     @Query("SELECT m FROM medico m ORDER BY REPLACE(REPLACE(m.nome, 'Dr. ', ''), 'Dra. ', '')")
      Page<Medico> findAllOrderByNomeIgnoringPrefix(Pageable pageable);
+
+
 
 
      //gera o aleatorio(medico)

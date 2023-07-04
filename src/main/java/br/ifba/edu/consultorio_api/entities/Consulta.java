@@ -13,7 +13,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Table(name = "consulta")
 @Entity(name = "consulta")
 @Getter
 @Setter
@@ -35,16 +34,17 @@ public class Consulta {
     @Enumerated(EnumType.STRING)
     private MotivoCancelamento cancelamento;
 
+    // Construtor utilizado para criar uma Consulta a partir de um objeto ConsultaDTO
     public Consulta(ConsultaDTO consultaDTO) {
         this.medico = consultaDTO.medico();
         this.paciente = consultaDTO.paciente();
         this.dataHora = consultaDTO.dataHora();
     }
-    public Consulta(ConsultaResponseDTO consultaDTO) {
 
+    // Construtor utilizado para criar uma Consulta a partir de um objeto ConsultaResponseDTO
+    public Consulta(ConsultaResponseDTO consultaDTO) {
         this.medico = consultaDTO.medico();
         this.paciente = consultaDTO.paciente();
         this.dataHora = consultaDTO.dataHora();
     }
-   
 }

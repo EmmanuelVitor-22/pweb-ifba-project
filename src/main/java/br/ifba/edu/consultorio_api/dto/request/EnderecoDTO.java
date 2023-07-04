@@ -18,6 +18,7 @@ public record EnderecoDTO(
          @NotBlank(message = "CEP não pode ser nulo ou vazio")
          String cep
 ) {
+    //Construtor que recebe um objeto Consulta e cria um objeto ConsultaDTO com base nos dados da consulta.
     public EnderecoDTO(Endereco endereco) {
        this ( endereco.getLogradouro(),
          endereco.getNumero(),

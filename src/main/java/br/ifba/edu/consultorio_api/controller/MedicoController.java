@@ -1,9 +1,7 @@
 package br.ifba.edu.consultorio_api.controller;
 
-import br.ifba.edu.consultorio_api.dto.PacienteResponseDTO;
 import br.ifba.edu.consultorio_api.dto.request.MedicoDTO;
 import br.ifba.edu.consultorio_api.dto.request.update.MedicoUpdateDTO;
-import br.ifba.edu.consultorio_api.dto.request.update.PacienteUpdateDTO;
 import br.ifba.edu.consultorio_api.dto.response.MedicoResponseDTO;
 import br.ifba.edu.consultorio_api.service.MedicoService;
 import jakarta.transaction.Transactional;
@@ -26,11 +24,13 @@ public class MedicoController {
     @Autowired
     private MedicoService medicoService;
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/listar")
     public ResponseEntity<List<MedicoResponseDTO>> listarMedicos() {
         return medicoService.listarTodosMedicos();
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/ordenados")
     public ResponseEntity<Page<MedicoResponseDTO>> listarMedicosOrdenadosPaginados(
             @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
@@ -38,16 +38,19 @@ public class MedicoController {
         return ResponseEntity.ok(medicoResponseDTO);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("cadastrar")
     public ResponseEntity<MedicoDTO> criarMedico(@RequestBody @Valid MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         return medicoService.criarMedicos(medicoDTO, builder);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PutMapping("/atualizar/{id}")
     @Transactional
-    public ResponseEntity<MedicoUpdateDTO> atualizarMedicos(@PathVariable Long id, @RequestBody @Valid MedicoUpdateDTO medicoUpdateDTO) {
-        return medicoService.atualizarMedicos(id, medicoUpdateDTO);
+    public ResponseEntity<MedicoUpdateDTO> atualizarMedico(@PathVariable Long id, @RequestBody @Valid MedicoUpdateDTO medicoUpdateDTO) {
+        return medicoService.atualizarMedico(id, medicoUpdateDTO);
     }
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/deletar/{id}")
     @Transactional
     public ResponseEntity<MedicoUpdateDTO> deletarPaciente(@PathVariable Long id) {

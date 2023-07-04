@@ -24,6 +24,7 @@ public class PacienteController {
     @Autowired
     PacienteService pacienteService;
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/listar")
     public ResponseEntity<Page<PacienteResponseDTO>> listarPacientes(
             @PageableDefault(sort = "nome", direction = Sort.Direction.ASC, size = 10) Pageable pageable) {
@@ -31,6 +32,7 @@ public class PacienteController {
         return ResponseEntity.ok(pacientesDTO);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/buscar-por-nome/{nome}{letra}")
     public ResponseEntity<List<PacienteResponseDTO>> buscarPorNome(@RequestParam("nome") String nome) {
         return pacienteService.listarPorNomePaciente(nome);

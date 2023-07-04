@@ -33,8 +33,8 @@ public class PacienteService {
     public ResponseEntity<List<PacienteResponseDTO>> listarPorNomePaciente(String nome) {
         return ResponseEntity.ok(pacienteRepository.findByNome(nome)
                 .stream()
-                .map(paciente -> new PacienteResponseDTO(paciente.id(),
-                        paciente.nome(), paciente.CPF(), paciente.status() ,paciente.email(), paciente.endereco()))
+                .map(paciente -> new PacienteResponseDTO(
+                        paciente.nome(), paciente.CPF(),paciente.email()))
                 .collect(Collectors.toList()));
     }
     public ResponseEntity<List<PacienteResponseDTO>> listarPorLetraPaciente( String letra) {

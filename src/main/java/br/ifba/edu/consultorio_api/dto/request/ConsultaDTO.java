@@ -15,10 +15,13 @@ public record ConsultaDTO(
         LocalDateTime dataHora
 
 ) {
+
+        //Construtor que recebe um objeto Consulta e cria um objeto ConsultaDTO com base nos dados da consulta.
         public ConsultaDTO(Consulta consulta) {
                 this(
-                                consulta.getMedico(),
-                                consulta.getPaciente(),
-                                consulta.getDataHora());
+                        consulta.getMedico(),
+                        consulta.getPaciente(),
+                        consulta.getDataHora()
+                );
         }
 }

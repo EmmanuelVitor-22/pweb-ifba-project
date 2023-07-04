@@ -54,13 +54,13 @@ public class MedicoService {
 
     public ResponseEntity<MedicoDTO> criarMedicos(MedicoDTO medicoDTO, UriComponentsBuilder builder) {
         var medico = medicoRepository.save(new Medico(medicoDTO));
-        var uri = builder.path("/medicos").buildAndExpand(medico.getId()).toUri();
+        var uri = builder.path("/medicos/cadastrar").buildAndExpand(medico.getId()).toUri();
         return ResponseEntity.created(uri).body(medicoDTO);
     }
 
 
 
-    public ResponseEntity<MedicoUpdateDTO> atualizarMedicos(Long id, MedicoUpdateDTO medicoUpdateDTO) {
+    public ResponseEntity<MedicoUpdateDTO> atualizarMedico(Long id, MedicoUpdateDTO medicoUpdateDTO) {
         Optional<Medico> medicoOptional = medicoRepository.findById(id);
         if (medicoOptional.isPresent()){
             Medico medico = medicoOptional.get();

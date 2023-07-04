@@ -108,4 +108,5 @@ public class ConsultaService {
     public ResponseEntity<List<ConsultaResponseDTO>> listarTudo(){
         return ResponseEntity.ok( consultaRepository.findAll().stream().map(ConsultaResponseDTO::new).collect(Collectors.toList()));
     }
+
 }
